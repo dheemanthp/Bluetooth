@@ -9,3 +9,14 @@ The audio data rate should be sufficiently smaller than usable bit rate on the B
 This is to allow retransmission schemes to reduce the effects of packet loss.
 The profile does not exclude any "content protection method".
 Countering the effects of such delays depends on implementation.
+
+TODO:
+Application service capability for A2DP : consists of audio codec capability and content protection capability
+transport service capability : is provided by "AVDTP" in order to manipulate the streaming packets more intelligently.
+Once streaming connection is established and Start Streaming procedure in "GAVDP" is executed
+
+Audio codec interoperability and details of codec parameters:
+1)Mode
+2)Sampling frequency
+3)Bit rate
+
