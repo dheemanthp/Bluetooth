@@ -23,7 +23,7 @@ Audio codec interoperability and details of codec parameters:
 
 
 ===================================================================
-C questions
+MEMORY MANAGEMENT IN C
 ===================================================================
 MALLOC A HUGE CHUNK IS ALLOCATED
 “malloc” or “memory allocation” method is used to dynamically allocate a single large block of memory with the specified size. It returns a pointer of type "void" which can be cast into a pointer of any form.If the space is insufficient, allocation fails and returns a NULL pointer.
@@ -50,6 +50,15 @@ There is no error indication if the stack frame cannot be extended.
 On many systems alloca() cannot be used inside the list of arguments of a function call, because the stack space reserved by alloca()
 would appear on the stack in the middle of the space for the function arguments.
 
+===================================================================
+Dangling Pointer in C : http://www.c4learn.com/c-programming/c-dangling-pointer-causes/
+===================================================================
+Dangling pointers arise when an object is deleted or de-allocated, without modifying the value of the pointer, so that the pointer still points to the memory location of the de-allocated memory.
+In short pointer pointing to non-existing memory location is called  dangling pointer.
+
+===================================================================
+OS CONCEPTS: https://www.tutorialspoint.com/operating_system/os_memory_management.htm
+===================================================================
 
 
 
