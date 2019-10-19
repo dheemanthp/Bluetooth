@@ -3,6 +3,15 @@ Delays while processing Data:
 Radio signal processing
 data buffering
 encode/decode of the stream data. 
+Encryption is optional
+
+Audio Streaming Procedure:
+L2cap ->AVDTP(Signalling/media channel) -> Decryption(optional)  -> Decoding
+
+BIT RATE: KBits/sec
+bit_rate = 8 * frame_length* fs / nrof_subbands / nrof_blocks
+
+where fs, nrof_subbands and nrof_blocks denote sampling frequency, number of subbands and number of blocks, respectively. Bit Rate is expressed in kb/s, because fs is expressed in kHz.
 
 
 The audio data rate should be sufficiently smaller than usable bit rate on the Bluetooth link.
