@@ -1,1 +1,7 @@
+Delays while processing Data:
+==============================
+Radio signal processing
+data buffering
+encode/decode of the stream data. 
 
+Countering the effects of such delays depends on implementation.
