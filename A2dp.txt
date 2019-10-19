@@ -4,4 +4,8 @@ Radio signal processing
 data buffering
 encode/decode of the stream data. 
 
+
+The audio data rate should be sufficiently smaller than usable bit rate on the Bluetooth link.
+This is to allow retransmission schemes to reduce the effects of packet loss.
+The profile does not exclude any "content protection method".
 Countering the effects of such delays depends on implementation.
