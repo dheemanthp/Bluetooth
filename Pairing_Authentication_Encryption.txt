@@ -1,0 +1,7 @@
+Secure simple pairing:
+======================
+1)public key exchange
+2)authenticantion stage 1
+3)authentication stage 2
+4)Link key calculation
+5)LMP authentication and Encryption
