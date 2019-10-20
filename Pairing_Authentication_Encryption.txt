@@ -5,3 +5,25 @@ Secure simple pairing:
 3)authentication stage 2
 4)Link key calculation
 5)LMP authentication and Encryption
+
+BR/EDR uses E0/SAFER as a cipher
+E0 Stream Cipher:
+E0 is a 128-bit key stream cipher that provides the link encryption in the Bluetooth wireless standard
+E0 is a stream cipher used in the Bluetooth protocol. It generates a sequence of "pseudorandom numbers" and combines it with the data using the XOR operator. The key length may vary, but is generally 128 bits.
+E0 itself is not particularly secure and is vulnerable to known plaintext attacks.
+Two-level E0, used in 2.1 to 4.0, is slightly less vulnerable
+https://link.springer.com/referenceworkentry/10.1007%2F0-387-23483-7_117
+
+Bluetooth LE uses AES-CCM: 
+BLE link-layer security is designed to protect information transferred over this wireless link
+BLE uses the AES-CCM cipher with 128-bit key length to provide data encryption and integrity over the wireless link. 
+AES-CCM is a FIPS 140-2 approved cipher and is also used for security in other popular applications such as WiFi WPA2 and TLS 1.3.
+The key is generated using Diffie-Hellman method with elliptic curve cryptography (ECC). Each device generates the same AES-CCM key at its end using the ECC public key received from the peer and its own secret ECC private key. ECC is a modern technique that provides strong security with small public-key sizes.
+
+With these mechanisms, BLE has introduced state-of-the-art encryption and integrity protection at the link layer. Pairing methods provide adequate authentication between devices when executed as specified in the standard. However, when IoT sensors do not have requisite user input/output capabilities, they use static pairing codes or Just Works pairing. In these instances, additional security measures are needed to protect sensors from phishing attacks.
+
+
+
+
+
+
