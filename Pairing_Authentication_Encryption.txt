@@ -3,6 +3,12 @@ The Federal Information Processing Standard (FIPS) Publication 140-2, (FIPS PUB 
 Introduced in the Bluetooth 2.1 specification, Secure Simple Pairing (SSP) fixes issues of the original pairing method.
 It was relatively easy to determine the PIN-code and determine the Link Key by passively 'sniffing' the pairing process.
 
+1)Numeric Comparison protects against passive and active attacks;
+2)Just works protects against passive attacks IF ECDH is used, and never protects against active attacks;
+3)Passkey entry protects against passive attacks IF ECDH is used, and should protect against an active MITM attack (although there are some doubts about that, e.g. Padovan .
+4)Out Of Band security depends on the OOB method that is used.
+
+
 
 Secure simple pairing:
 ======================
@@ -13,8 +19,11 @@ Secure simple pairing:
 5)LMP authentication and Encryption
 
 
+
 ================================================================
-Encryption : BR/EDR uses E0 , and LE uses AES-CCM for Encryption
+Encryption : 
+BR/EDR uses E0 for Secure simple pairing , but BR/EDR uses AES-CCM for secure Connections.
+LE uses AES-CCM for Encryption for secure Connections.
 ================================================================
 E0 Stream Cipher:
 E0 is a 128-bit key stream cipher that provides the link encryption in the Bluetooth wireless standard
