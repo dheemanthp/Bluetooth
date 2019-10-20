@@ -13,8 +13,9 @@ Secure simple pairing:
 5)LMP authentication and Encryption
 
 
-
-BR/EDR uses E0/SAFER as a cipher
+================================================================
+Encryption : BR/EDR uses E0 , and LE uses AES-CCM for Encryption
+================================================================
 E0 Stream Cipher:
 E0 is a 128-bit key stream cipher that provides the link encryption in the Bluetooth wireless standard
 E0 is a stream cipher used in the Bluetooth protocol. It generates a sequence of "pseudorandom numbers" and combines it with the data using the XOR operator. The key length may vary, but is generally 128 bits.
