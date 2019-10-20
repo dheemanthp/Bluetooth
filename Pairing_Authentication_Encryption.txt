@@ -16,7 +16,13 @@ Version 4.2 => BR/EDR (uses Secure Connections)
 LE
 Version 4.0 and 4.1 => LE legacy (uses Secure Simple Pairing)
 Version 4.2 => LE (uses Secure Connections)
-
+===========================
+pairing
+bonding
+device authentication
+message encryption
+message integrity
+===========================
 
 Secure simple pairing:
 ======================
