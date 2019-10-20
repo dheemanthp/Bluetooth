@@ -1,3 +1,6 @@
+Introduced in the Bluetooth 2.1 specification, Secure Simple Pairing (SSP) fixes issues of the original pairing method.
+It was relatively easy to determine the PIN-code and determine the Link Key by passively 'sniffing' the pairing process.
+
 Secure simple pairing:
 ======================
 1)public key exchange
@@ -5,6 +8,8 @@ Secure simple pairing:
 3)authentication stage 2
 4)Link key calculation
 5)LMP authentication and Encryption
+
+
 
 BR/EDR uses E0/SAFER as a cipher
 E0 Stream Cipher:
