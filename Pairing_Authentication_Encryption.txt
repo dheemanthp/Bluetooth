@@ -8,6 +8,14 @@ It was relatively easy to determine the PIN-code and determine the Link Key by p
 3)Passkey entry protects against passive attacks IF ECDH is used, and should protect against an active MITM attack (although there are some doubts about that, e.g. Padovan .
 4)Out Of Band security depends on the OOB method that is used.
 
+BR/EDR
+Prior to version 2.1 => BR/EDR legacy
+Version 2.1 => BR/EDR (uses Secure Simple Pairing)
+Version 4.2 => BR/EDR (uses Secure Connections)
+
+LE
+Version 4.0 and 4.1 => LE legacy (uses Secure Simple Pairing)
+Version 4.2 => LE (uses Secure Connections)
 
 
 Secure simple pairing:
