@@ -16,6 +16,8 @@ Write your code in this editor and press "Run" button to compile and execute it.
             *dst = *src;
             dst++;
             src++;
+          //the above 3 lines can be clubbed into 1 line
+          //*dst++ = *src++;
         }
         *dst = '\0';
         return ptr;
