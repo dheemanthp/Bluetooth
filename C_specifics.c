@@ -1,3 +1,6 @@
+Volatile in C:https://barrgroup.com/Embedded-Systems/How-To/C-Volatile-Keyword
+Thus all shared global objects (variables, memory buffers, hardware registers, etc.) 
+must also be declared volatile to prevent compiler optimization from introducing unexpected behaviors.
 
 Const in C : https://www.geeksforgeeks.org/const-qualifier-in-c/
 Pointer to constant Integer : const int *ptr;
@@ -5,9 +8,10 @@ Constant pointer to Integer :  int * const ptr;
 Constant pointer to Constant Integer : const int * const ptr;
 
 
+=========================================================================
 The memory region is divided into below regions
 https://www.geeksforgeeks.org/memory-layout-of-c-program/
-
+=========================================================================
 1)text or code segment
 there are executable instructions here
 2)data segment
@@ -29,3 +33,40 @@ its automatic and temporary variables. This is how recursive functions in C can 
 a new stack frame is used, so one set of variables doesn’t interfere with the variables from another instance of the function.
 4)HEAP
 Heap area is managed by malloc, realloc, and free, which may use the brk and sbrk system calls to adjust its size 
+=========================================================================
+brk() and sbrk() are different. 
+https://stackoverflow.com/questions/19676688/how-malloc-and-sbrk-works-in-unix
+=========================================================================
+
+Syscalls are expensive to process because of the additional overhead that a syscall places:
+you have to switch to kernel mode. A system call gets into the kernel by issuing a "trap" or interrupt.
+  It's a call to the kernel for a service, and because it executes in the kernel address space, 
+  it has a high overhead switch to kernel (and then switching back).
+
+This is why malloc reduces the number of calls to sbrk() and brk(). It does so by requesting more memory 
+than you asked it to, so that it doesn't have to issue a syscall everytime you need more memory.
+
+brk() and sbrk() are different.
+
+brk is used to set the end of the data segment to the value you specify. 
+It says "set the end of my data segment to this address". Of course, the address you specify 
+must be reasonable, the operating system must have enough memory, and you can't make it point
+to somewhere that would otherwise exceed the process maximum data size. Thus, brk(0) is invalid, 
+since you'd be trying to set the end of the data segment to address 0, which is nonsense.
+
+On the other hand, sbrk increments the data segment size by the amount you specify, 
+and returns a pointer to the previous break value. Calling sbrk with 0 is valid; it is a 
+way to get a pointer to the current data segment break address.
+
+malloc is not a system call, it's a C library function that manages memory using sbrk. 
+According to the manpage, malloc(0) is valid, but not of much use:
+
+If size is 0, then malloc() returns either NULL, or a unique pointer value that 
+can later be successfully passed to free().
+
+So, no, brk(0), sbrk(0) and malloc(0) are not equivalent: the first of them is invalid,
+the second is used to obtain the address of the program's break, and the latter is useless.
+
+Keep in mind that you should never use both malloc and brk or sbrk throughout your program. 
+malloc assumes it's got full control of brk and sbrk, 
+if you interchange calls to malloc and brk, very weird things can happen.
