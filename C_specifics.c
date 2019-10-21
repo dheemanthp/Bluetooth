@@ -1,3 +1,10 @@
+
+Const in C : https://www.geeksforgeeks.org/const-qualifier-in-c/
+Pointer to constant Integer : const int *ptr;
+Constant pointer to Integer :  int * const ptr;
+Constant pointer to Constant Integer : const int * const ptr;
+
+
 The memory region is divided into below regions
 https://www.geeksforgeeks.org/memory-layout-of-c-program/
 
