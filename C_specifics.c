@@ -1,8 +1,12 @@
+=========================================================================
 Volatile in C:https://barrgroup.com/Embedded-Systems/How-To/C-Volatile-Keyword
+=========================================================================
 Thus all shared global objects (variables, memory buffers, hardware registers, etc.) 
 must also be declared volatile to prevent compiler optimization from introducing unexpected behaviors.
 
+  =========================================================================
 Const in C : https://www.geeksforgeeks.org/const-qualifier-in-c/
+=========================================================================
 Pointer to constant Integer : const int *ptr;
 Constant pointer to Integer :  int * const ptr;
 Constant pointer to Constant Integer : const int * const ptr;
