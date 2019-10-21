@@ -1,4 +1,24 @@
 =========================================================================
+Structure padding , and pragma packing , and attribute packed
+https://www.geeksforgeeks.org/how-to-avoid-structure-padding-in-c/
+=========================================================================
+Both pragma packing #pragma pack(1), and __attribute__((packed)) will result in size 13
+without them , it will be size 16.(that char will take up 4 bytes).
+#pragma pack(1) 
+struct s { 
+    int i; 
+    char ch; 
+    double d; 
+}; 
+struct s { 
+    int i; 
+    char ch; 
+    double d; 
+} __attribute__((packed));  
+=========================================================================
+  
+
+=========================================================================
 Volatile in C:https://barrgroup.com/Embedded-Systems/How-To/C-Volatile-Keyword
 =========================================================================
 Thus all shared global objects (variables, memory buffers, hardware registers, etc.) 
