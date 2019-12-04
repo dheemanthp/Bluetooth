@@ -2,6 +2,7 @@ Delays while processing Data:
 https://wladimir-tm4pda.github.io/porting/audio.html
 https://wiki.merproject.org/wiki/Architecture#Multimedia
 https://www.freedesktop.org/wiki/Software/PulseAudio/About/
+https://wiki.tizen.org/Porting_Guide/Connectivity
 ==============================
 Radio signal processing
 data buffering
