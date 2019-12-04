@@ -1,4 +1,4 @@
-Delays while processing Data:
+Delays while processing Data:https://wladimir-tm4pda.github.io/porting/audio.html
 ==============================
 Radio signal processing
 data buffering
