@@ -1,3 +1,35 @@
+Function pointer:
+https://aticleworld.com/function-pointer-in-c/
+https://www.geeksforgeeks.org/callbacks-in-c/
+https://stackoverflow.com/questions/2738463/implementing-callback-functions-in-c
+
+#include<stdio.h>
+
+typedef void (*callback_t) (int);//declaration 
+callback_t callback;
+
+//definition
+void callback_proc(int a)
+{
+    printf ("Inside callback function %d \n", a);
+}
+
+//registers for a callback
+void reg( callback_t _callback , int a)
+{
+    printf ("Inside registration \n");
+    
+    _callback(a);
+}
+
+int main ()
+{
+    callback = callback_proc;//assign the address of the function
+    reg(callback, 4);//register the callback
+
+    return 0;
+}
+
 =========================================================================
 Structure padding , and pragma packing , and attribute packed
 https://www.geeksforgeeks.org/how-to-avoid-structure-padding-in-c/
