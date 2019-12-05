@@ -1,3 +1,4 @@
 
 https://github.com/ev3dev/ev3dev.github.io/pull/24/files/271d3fff1b3804c9bffbdcc147b961f301302c94
 https://www.howtoforge.com/tutorial/how-to-send-sound-through-bluetooth-on-linux/
+https://gstreamer.freedesktop.org/documentation/application-development/introduction/gstreamer.html?gi-language=c
