@@ -1,3 +1,4 @@
+very good link : https://www.hackerearth.com/practice/basic-programming/bit-manipulation/basics-of-bit-manipulation/tutorial/
 
 
 https://www.geeksforgeeks.org/extract-k-bits-given-position-number/
