@@ -2,6 +2,25 @@
 very good link : https://www.hackerearth.com/practice/basic-programming/bit-manipulation/basics-of-bit-manipulation/tutorial/
 ```
 ```
+IN C:https://leetcode.com/problems/reverse-bits/
+uint32_t reverseBits(uint32_t num) {
+    unsigned int count = sizeof(num) * 8;//31 
+    unsigned int reverse_num = 0; 
+    while(num) 
+    { 
+       reverse_num <<= 1;//left shift by 1        
+       reverse_num |= num & 1;  //OR
+       num >>= 1; //drop bits
+       count--;//until num becomes zero decrement count 
+    }
+    printf(" the count value is %d", count);
+    if(count != (sizeof(num) * 8)){
+        reverse_num <<= count; // left shift by count times 
+    }
+    return reverse_num;// reverse the number
+}
+
+
 //Reverse bits in an Integer
 public class Solution {
 int total = Integer.SIZE - 1;//total number of Bits is 31
