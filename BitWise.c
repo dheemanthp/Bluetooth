@@ -1,5 +1,27 @@
+```
 very good link : https://www.hackerearth.com/practice/basic-programming/bit-manipulation/basics-of-bit-manipulation/tutorial/
-
+```
+```
+//Reverse bits in an Integer
+public class Solution {
+int total = Integer.SIZE - 1;//total number of Bits is 31
+//Drop the input 0th bit ,everytime you loop
+public int reverseBits(int n) {
+  int result = 0;
+  //loop through 31 bits or until the number becomes zero
+  while(total >= 0 && n !=0) {
+    //check if the 0th bit is set
+    if ((n & 1) != 0) {
+        //OR the result by LEFT SHIFTING 1 TOTAL TIMES
+        result = result  | (1 << total);
+    }
+    n >>= 1;//drop the 0th bit by doing a RIGHT SHIFT
+    total--;//decrement count
+  }
+return result;  
+}
+}
+````
 
 https://www.geeksforgeeks.org/extract-k-bits-given-position-number/
 // Function to extract k bits from p position 
