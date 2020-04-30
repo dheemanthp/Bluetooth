@@ -1,5 +1,6 @@
 ```
 very good link : https://www.hackerearth.com/practice/basic-programming/bit-manipulation/basics-of-bit-manipulation/tutorial/
+https://medium.com/@codingfreak/bit-manipulation-interview-questions-and-practice-problems-27c0e71412e7
 ```
 ```
 IN C:https://leetcode.com/problems/reverse-bits/
