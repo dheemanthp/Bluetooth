@@ -1,3 +1,4 @@
+//https://medium.com/@codingfreak/bit-manipulation-interview-questions-and-practice-problems-27c0e71412e7
 public class MyClass {
     public static void main(String args[]) {
       int x= 4;
