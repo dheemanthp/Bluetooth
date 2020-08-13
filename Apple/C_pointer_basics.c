@@ -65,7 +65,7 @@ int main()
     printf(" the xyz value is %d\n",xyz[0][0]);
     printf(" the xyz value is %d\n",xyz[1][2]);
     
-    int abcd[2][3] = {1,2,3,4,5,6};//init to all zeros
+    int abcd[2][3] = {1,2,3,4,5,6};//init with valid values
     
     
     //play with 2D pointers
