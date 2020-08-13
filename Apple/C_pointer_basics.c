@@ -65,6 +65,26 @@ int main()
     printf(" the xyz value is %d\n",xyz[0][0]);
     printf(" the xyz value is %d\n",xyz[1][2]);
     
+    int abcd[2][3] = {1,2,3,4,5,6};//init to all zeros
+    
+    
+    //play with 2D pointers
+    printf(" the abcd starting address is %p\n",abcd);
+    printf(" the abcd address is %p\n",&abcd);
+    printf(" the abcd address is %p\n",(abcd+1));//increment by one row , each row contains 3 integers
+    printf(" the abcd address is %p\n",(abcd+2));//increment by one row
+    
+    printf(" the abcd value is %d\n",**(abcd+0));//first row and first value
+    printf(" the abcd value is %d\n",**(abcd+1));//second row first value
+    
+    printf(" the abcd value is %d\n",*(*(abcd+0)+0));//first row and first value
+    printf(" the abcd value is %d\n",*(*(abcd+0)+1));//first row and second value
+    printf(" the abcd value is %d\n",*(*(abcd+0)+2));//first row and third value
+    
+    printf(" the abcd value is %d\n",*(*(abcd+1)+0));//second row and first value
+    printf(" the abcd value is %d\n",*(*(abcd+1)+1));//second row and second value
+    printf(" the abcd value is %d\n",*(*(abcd+1)+2));//second row and third value
+    
     
     
     
