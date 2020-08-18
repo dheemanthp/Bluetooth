@@ -105,11 +105,6 @@ int get_unique_pool_id_1() {
   return 1;
   
 }
-// generate a unique_pool_id
-int get_unique_pool_id_2() {
-  return 2;
-  
-}
 
 //check if we can allocate from exisiting pool
 BUFF * check_current_pool (CLIENT_INFO * client_info, int size_requested) {
