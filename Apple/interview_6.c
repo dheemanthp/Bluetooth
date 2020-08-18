@@ -63,9 +63,11 @@ CLIENT_INFO client_array[10];
 NODE_REF * insert_into_reference_Queue(int pool_id, NODE_REF * head , BUFF * address, int size_requested) {
   
   //newly allocated refrence NODE in queue
-  NODE_REF * new_node = new_node = (NODE_REF *) malloc(sizeof(NODE_REF));
+  NODE_REF * new_node = (NODE_REF *) malloc(sizeof(NODE_REF));
+  printf("NEWLY ALLOCATED NODE ADDRESS %p\n",new_node);
   new_node->pool_id = pool_id;
   new_node->pool_address_start = address;
+    //printf("the NEW pool_address_start is %p\n",new_node->pool_address_start);
   new_node->pool_size_used = size_requested;
   new_node->pool_size_remaining = POOL_SIZE - size_requested;
   
@@ -74,8 +76,6 @@ NODE_REF * insert_into_reference_Queue(int pool_id, NODE_REF * head , BUFF * add
   if(current_node == NULL) {
 
     new_node->next = NULL;
-    head = new_node;
-    return head;
   }
     else {
           new_node->next = current_node;
@@ -88,23 +88,37 @@ NODE_REF * insert_into_reference_Queue(int pool_id, NODE_REF * head , BUFF * add
 //create a new pool
   BUFF * create_new_pool () {
     //newly allocated region of POOL
+    
     BUFF *ptr = (BUFF *) malloc(POOL_SIZE * sizeof(BUFF)); // 1024 * 1 byte
+    printf("NEWLY ALLOCATED POOL ADDRESS %p\n",ptr);
     return ptr;
   }
 
 // generate a unique_pool_id
-int get_unique_pool_id() {
+int get_unique_pool_id_0() {
   return 0;
+  
+}
+
+// generate a unique_pool_id
+int get_unique_pool_id_1() {
+  return 1;
+  
+}
+// generate a unique_pool_id
+int get_unique_pool_id_2() {
+  return 2;
   
 }
 
 //check if we can allocate from exisiting pool
 BUFF * check_current_pool (CLIENT_INFO * client_info, int size_requested) {
 
+  
   //we can accomodate the request from the already allocated pool , so no need to create new pool
-  if (client_info->head != NULL && client_info->head->pool_size_remaining > size_requested) {
+  if (client_info->head != NULL && client_info->head->pool_size_remaining >= size_requested) {
 
-    
+    printf("UPDATE OLD POOL\n");
     client_info->head->pool_size_remaining = client_info->head->pool_size_remaining - size_requested;
     client_info->head->pool_size_used = client_info->head->pool_size_used + size_requested;
     
@@ -121,7 +135,9 @@ BUFF * check_current_pool (CLIENT_INFO * client_info, int size_requested) {
   else {
 
         BUFF * ptr = create_new_pool();
-        int pool_id = get_unique_pool_id();
+        printf(" NEW POOL ID with 1 created\n");
+        int pool_id = get_unique_pool_id_1();
+        
         
         client_info->head = insert_into_reference_Queue(pool_id, client_info->head,ptr,size_requested);
        return client_info->head->pool_address_start;
@@ -138,9 +154,10 @@ bool LIB_MEM_INIT(int client_id) {
   BUFF *ptr = create_new_pool();
   client_array[client_id].client_id = client_id;
   client_array[client_id].pools_allocated = 1;
-  int pool_id = get_unique_pool_id();
+  int pool_id = get_unique_pool_id_0();
   // we just create a pool , so memory needed for now zero
   client_array[client_id].head = insert_into_reference_Queue(pool_id, NULL,ptr,0); 
+  
   printf("LIB_MEM_INIT COMPLETE\n");
   
   return true;
@@ -175,16 +192,51 @@ void LIB_MEM_FREE_ALL(int client_id) {
 
 
 
+void print(int client_id) {
+        NODE_REF * curr_node = client_array[client_id].head;
+
+    
+    printf("\n========================================================\n");
+    while(curr_node != NULL) {
+        printf("\nthe pool info\n");
+        printf("the pool id is %d\n",curr_node->pool_id);
+        printf("the pool_address_start is %p\n",curr_node->pool_address_start);
+        printf("the pool_size_used is %d\n",curr_node->pool_size_used);
+        printf("the pool_size_remaining is %d\n",curr_node->pool_size_remaining);
+        curr_node  = curr_node -> next;
+        
+        
+    }
+    printf("\n========================================================\n");
+    
+    
+}
 
 // To execute C, please define "int main()"
 //NOTE FROM DHEEMANTH
 //i have implemented the basic outline 
 // there is so much more that could done here :)
-
+//Please note i have not taken care of fragmentation
+// i have used only 2 pool ID's O and 1 , for client id 0
+//we can generate more , but to solve this problem i just used just two
 
 int main() {
-    LIB_MEM_INIT(1);
-    LIB_MEM_ALLOC(1, 200);
+    //POOL ID 0 , CLIENT ID 0
+    LIB_MEM_INIT(0);
+    LIB_MEM_ALLOC(0, 200);
+    print(0);
+    LIB_MEM_ALLOC(0, 200);
+    print(0);
+    //POOL ID 0 , CLIENT ID 0
+    //will use existing pool as old pool can accomodate this new request
+    LIB_MEM_ALLOC(0, 500);
+    print(0);
+    //POOL ID 1 , CLIENT ID 0
+    //will use new pool as old pool cannot omodate this new request
+    LIB_MEM_ALLOC(0, 500);
+    print(0);
+
+    
     LIB_MEM_FREE_ALL(1);
 
 }
