@@ -539,3 +539,66 @@ int main() {
 
   return 0;
 }
+
+//OUTPUT
+/*
+==============================================
+PROBLEM 1
+==============================================
+Problem 1: Original ff
+Problem 1: Flipped 7e
+Problem 1: Original 7e
+Problem 1: Flipped ff
+==============================================
+PROBLEM 4
+==============================================
+ No Key match unable to delete Entry Pollution
+ Key found: Tesla ,Value: Accelerates path to sustainable energy
+ Key not found: Desktop
+Problem 4: Tesla = Accelerates path to sustainable energy
+==============dictorinary dump================
+ Key: Pollute ,Value: Act of contamination with harmful substances
+ Key: laptop ,Value: with SSD
+ Key: Tesla ,Value: Accelerates path to sustainable energy
+==============================================
+==============================================
+PROBLEM 5
+==============================================
+ the buffer is z , index = 6
+ the buffer is x , index = 7
+ the buffer is e , index = 8
+ the buffer is g , index = 9
+ the buffer is h , index = 10
+ the buffer is j , index = 11
+ the buffer is q , index = 12
+ the buffer is w , index = 13
+ the buffer is e , index = 14
+ the buffer is r , index = 15
+ the buffer is t , index = 16
+ the buffer is y , index = 17
+ the buffer is 3 , index = 18
+ the buffer is 4 , index = 19
+ the buffer is w , index = 0
+ the buffer is e , index = 1
+ the buffer is r , index = 2
+ the buffer is t , index = 3
+ the buffer is y , index = 4
+ the buffer is 3 , index = 5
+==============================================
+PROBLEM 6
+==============================================
+test 1 pass
+test 2 pass
+test 3 pass
+test 4 pass
+test 5 pass
+test 6 pass
+test 7 pass
+Problem 6 , all tests pass
+==============================================
+PROBLEM 7
+==============================================
+451:test_append_strings Testing appending strings function
+Resulting string: String1String2
+==============================================
+*/
