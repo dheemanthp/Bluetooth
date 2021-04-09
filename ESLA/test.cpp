@@ -29,7 +29,8 @@ typedef unsigned char uint8_t ;
 void flip_hi_lo(uint8_t* b)
 {
 
-    //Since it has been clearly mentioned only MSB and LSB
+    //Since it has been clearly mentioned only MSB BIT and LSB BIT and not all bits
+    // Also since it is character , we can use a mask which is 1 byte
     //we can use a mask , where only those bits which needs to be flipped are set
     //XOR property helps to further flip it
     //mask is 1000 0001
@@ -196,6 +197,8 @@ public:
 
 private:
 //unordered map : order is not required to be tracked for this problem
+  //Internally implemented using hashtable
+//average cost of search, insert and delete from hash table is O(1). 
 unordered_map<string,string> umap;
 };
 
@@ -204,7 +207,8 @@ Dictonary::Dictonary() {
 }
 
 Dictonary::~Dictonary() {
-umap.clear();
+  umap.clear();
+
 }
 
 bool Dictonary::addEntry(const char *newWord, const char *meaning) {
@@ -282,6 +286,7 @@ void buffer_push_ISR(char data)
    fifo_buffer[buffer_level] = data;
    buffer_level++;
    if(buffer_level >=BUFFER_SIZE) {
+   //rotate as it is a circular buffer
    buffer_level = buffer_level % BUFFER_SIZE;
    }
 }
@@ -429,10 +434,20 @@ char *append_strings(char *str1, char* str2)
     //use alternatives like memmove , as we are now dynamically allocating memory,
     //and the caller will free it 
     char *result_str;
+    if(str1 == NULL && str2 != NULL){
+        printf("%d:%s ERROR: NULL pointers detected\n",__LINE__, __FUNCTION__);
+        return str2;
+    }
+    if(str1 != NULL && str2 == NULL){
+        printf("%d:%s ERROR: NULL pointers detected\n",__LINE__, __FUNCTION__);
+        return str1;
+    }
     if(str1 == NULL && str2 == NULL){
         printf("%d:%s ERROR: NULL pointers detected\n",__LINE__, __FUNCTION__);
         return NULL;
     }
+
+  
     int str1len = 0, str2len = 0;
     str1len = strlen(str1);
     str2len = strlen(str2);
