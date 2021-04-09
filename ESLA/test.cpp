@@ -434,15 +434,7 @@ char *append_strings(char *str1, char* str2)
     //use alternatives like memmove , as we are now dynamically allocating memory,
     //and the caller will free it 
     char *result_str;
-    if(str1 == NULL && str2 != NULL){
-        printf("%d:%s ERROR: NULL pointers detected\n",__LINE__, __FUNCTION__);
-        return str2;
-    }
-    if(str1 != NULL && str2 == NULL){
-        printf("%d:%s ERROR: NULL pointers detected\n",__LINE__, __FUNCTION__);
-        return str1;
-    }
-    if(str1 == NULL && str2 == NULL){
+    if(str1 == NULL || str2 == NULL){
         printf("%d:%s ERROR: NULL pointers detected\n",__LINE__, __FUNCTION__);
         return NULL;
     }
