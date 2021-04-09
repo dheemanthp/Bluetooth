@@ -471,7 +471,9 @@ void test_append_strings()
     printf("%d:%s Testing appending strings function\n",__LINE__, __FUNCTION__);
     result = append_strings(my_string1,my_string2);
     printf("Resulting string: %s\n", result);
-    free(result);
+    if(result != NULL) {
+      free(result);
+    }
 }
 
 
