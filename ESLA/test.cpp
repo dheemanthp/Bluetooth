@@ -174,7 +174,8 @@ void send_packet()
 /*
 1) I am little confused with the wording of the 4th question
 "look up a word with a complete of partial input" , if parital input is possible.
-For parital input a TRIE structure is useful
+For parital input a TRIE structure is useful. The we will have each character as the key, and then
+value will contain hashmap again contain <character, hasmap>.
 2) I was not clear if one word can have multiple meanings, Assumed that there will only be 1 meaning
 for a given word , Other wise would have used a Vector as Value , 
 containing many meanings for a given Key(word).
