@@ -204,7 +204,7 @@ Dictonary::Dictonary() {
 }
 
 Dictonary::~Dictonary() {
-
+umap.clear();
 }
 
 bool Dictonary::addEntry(const char *newWord, const char *meaning) {
