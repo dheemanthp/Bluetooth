@@ -38,7 +38,6 @@ void flip_hi_lo(uint8_t* b)
 
 }
 
-
 ////////////////////////////////////////////////////////////////////////////////
 // 2) Endianess (10 points)
 //    The following memory dump was taken while debugging an issue.
@@ -93,43 +92,27 @@ typedef struct
  
 // a) What are the values of each member of myPacket?
 /*
-1) Assuming all the variables are in stack , and hence it grows from higher address to lower address
-2) little endian : The least significant byte (the "little end") of the data is placed at the byte with the lowest address
-3) Since structure is unpacked, naturally aligned , even though count is a character the next
-byte will not be used.
-
-// 0x1005    0xB7
-// 0x1006    0x3B
-// 0x1007    0x82
-// 0x1008    0x9C
-
-// 0x1009    0xE5
-// 0x100A    0x17
-
-// 0x100B    0x40
-// 0x100C    0xEF
-
-// 0x100D    0x47
-// 0x100E    0x0F
-// 0x100F    0x98
-// 0x1010    0x6F
+1) little endian : The least significant byte (the "little end") of the data is placed at the byte with the lowest address
+2) Since structure is unpacked, naturally aligned , the structure will occupy a total of 12 bytes
+3) With Pragma pack(1) it will occupy 9 bytes , this changes the default structure packing to byte packing, 
+removing all padding bytes normally inserted to preserve alignment.
 
 
 //little endian
 count = 0x6F
-data[0] = 0xEF40
-data[1] = 0x17E5
-timestamp = 0x9C823BB7
+data[0] = 0x9E70
+data[1] = 0x9994
+timestamp = 0xE632B2CA
 
 // b) If the system was big-endian, what would the values of each member of
 //    myPacket be?
-/*
+
 1)big endian : The most significant byte (the "big end") of the data is placed at the byte with the lowest address
 //Big endian
-count = 0x47
-data[0] = 0xE517
-data[1] = 0x40EF
-timestamp = 0xB73B829C
+count = 0x6F
+data[0] = 0x709E
+data[1] = 0x9499
+timestamp = 0xCAB232E6
 */
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -161,11 +144,14 @@ timestamp = 0xB73B829C
   3)it is not very clear if the recipent will free the memory in this use case      
   */
 
-
 void allocate_packet(packet_S *pkt)
 {
-    pkt = (packet_S *)malloc(sizeof(packet_S *));
+    //pkt = (packet_S *)malloc(sizeof(packet_S *));//WRONG
     // Initialize rest of the structure
+  
+  //propose a better way to do this:
+  //We can instead only have sizeof(packet_S)
+  pkt = (packet_S *)malloc(sizeof(packet_S));//CORRECT WAY To Malloc
 }
 
 void send_packet()
@@ -175,7 +161,6 @@ void send_packet()
     // Send to recipient.
 }
 
-
 ////////////////////////////////////////////////////////////////////////////////
 // 4) Dictonary (30 points)
 //    Implement a dictionary that supports
@@ -184,6 +169,16 @@ void send_packet()
 //    - look up a word with a complete of partial input and return its meaning.
 //    Write a test stub to demonstrate all of the above functionality.
 //    Feel free to use STL or other library.
+
+//NOTE:
+/*
+1) I am little confused with the wording of the 4th question
+"look up a word with a complete of partial input" , if parital input is possible.
+For parital input a TRIE structure is useful
+2) I was not clear if one word can have multiple meanings, Assumed that there will only be 1 meaning
+for a given word , Other wise would have used a Vector as Value , 
+containing many meanings for a given Key(word).
+*/
 
 #define MAX_STRING_SIZE 2048
 
@@ -213,10 +208,11 @@ Dictonary::~Dictonary() {
 
 bool Dictonary::addEntry(const char *newWord, const char *meaning) {
   bool entryAdded = false;
-
+//if key is not found , add key,value pair
 if (umap.find(newWord) == umap.end()){
     umap.insert(make_pair(newWord, meaning));
 } else {
+    ////if key is found , update the meaning
     umap[newWord] = meaning;
 }
   entryAdded = true;
@@ -230,6 +226,7 @@ bool Dictonary::deleteEntry(const char *word) {
     entryDeleted = true;
     cout << " Key match , deleting Entry "<<  word << endl;
     umap.erase (word);  
+  //If key is not found
   } else {
     cout << " No Key match unable to delete Entry "<< word<<endl;
     entryDeleted = false;
@@ -247,6 +244,7 @@ bool Dictonary::searchEntry(const char *newWord, char *meaning) {
     strcpy(meaning, value.c_str());
     entryFound = true;
     }
+    //If key is not found 
     else 
     {
     cout << " Key not found: "<< newWord << endl;
@@ -262,7 +260,6 @@ void Dictonary::dumpDict() {
       cout << " Key: " << x.first << " ,Value: " << x.second << endl;
     cout << "==============================================" << endl;
 }
-
 
 ////////////////////////////////////////////////////////////////////////////////
 // 5a) Circular buffer (14 points)
@@ -287,7 +284,6 @@ void buffer_push_ISR(char data)
    buffer_level = buffer_level % BUFFER_SIZE;
    }
 }
-
  
 ////////////////////////////////////////////////////////////////////////////////
 // 5b) Print buffer (6 points)
@@ -310,8 +306,8 @@ int end = BUFFER_SIZE-1;
 //BUFFER_SIZE - 1
 
 if(fifo_buffer[buffer_level] != '\0' && (buffer_level != 0)) {
-	start = buffer_level;
-	end = buffer_level-1;
+  start = buffer_level;
+  end = buffer_level-1;
 }
 
 //print from start until end OR until we hit a null terminator
@@ -325,6 +321,7 @@ while ( start != end && fifo_buffer[start] != '\0') {
 }
 
 //Empty the buffer
+printf(" Empty the buffer , here i am just doing a memset\n");  
 memset ( fifo_buffer, 0, BUFFER_SIZE );
 
 }
@@ -422,7 +419,6 @@ bool TEST_validate_pointer_and_data(void)
  return result;
 }
 
-
 ////////////////////////////////////////////////////////////////////////////////
 // 7) Append Strings (15 points)
 //    Fix as many problems with this code as you can find.
@@ -436,28 +432,32 @@ char *append_strings(char *str1, char* str2)
         printf("%d:%s ERROR: NULL pointers detected\n",__LINE__, __FUNCTION__);
         return NULL;
     }
-    int str1len = 0, str2len = 0, j = 0;
+    int str1len = 0, str2len = 0;
     str1len = strlen(str1);
     str2len = strlen(str2);
     //allocate memory combining the 2 string lengths and also ensure we have
     //space for null termination '\0'
     result_str = (char*)malloc(str1len + str2len + 1);
+  
     strncpy(result_str, str1,str1len);
     strncpy(result_str + str1len, str2,str2len);
-	result_str[str1len + str2len + 1] = '\0';
-	return result_str;
+        //store null terminator
+  result_str[str1len + str2len] = '\0';
+  
+  return result_str;
 }
 
 void test_append_strings()
-{
-    char* my_string1 = "String1";
-    char* my_string2 = "String2";
+{   
+    char* my_string1 = (char*)"String1";//supress warning
+    char* my_string2 = (char*)"String2";
     char *result;
     printf("%d:%s Testing appending strings function\n",__LINE__, __FUNCTION__);
     result = append_strings(my_string1,my_string2);
     printf("Resulting string: %s\n", result);
     free(result);
 }
+
 
 // MAIN function
 int main() {
