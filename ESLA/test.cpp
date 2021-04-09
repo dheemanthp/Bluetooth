@@ -3,7 +3,7 @@
 #include<unordered_map>
 using namespace std;
 
-/* Tesla Inc. Wireless Software Engineer Screening Test
+/* esla Inc. Software Engineer Screening Test
  * Time: 90 minutes
  * Max score: 100
  *
