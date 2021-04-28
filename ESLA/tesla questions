@@ -1,0 +1,332 @@
+#include <iostream>
+using namespace std;
+
+// To execute C++, please define "int main()"
+int main() {
+  auto words = { "Hello, ", "World!", "\n" };
+  for (const string& word : words) {
+    cout << word;
+  }
+  return 0;
+}
+/* Tesla Inc. Wireless Software Engineer Screening Test
+ * Time: 90 minutes
+ * Max score: 100
+ *
+ * All solutions should compile without error or warnings
+ *
+ * Penalties:
+ * -1 / minute over time
+ * -3 for 1 or more compilation errors
+ * -2 for 1 or more compilation warnings
+ *
+ * Do not use outside aid or share the content of this test
+ *
+ * A main() function is provided at the bottom for your use
+ */
+////////////////////////////////////////////////////////////////////////////////
+
+
+////////////////////////////////////////////////////////////////////////////////
+// 1) Bit Manipulation (5 points)
+//    Write a function that inverts (0 -> 1 or 1 -> 0) the most significant and
+//    least significant bits of the data value pointed to by b.
+typedef unsigned char uint8_t ;
+void flip_hi_lo(uint8_t* b)
+{
+
+    //Since it has been clearly mentioned only MSB and LSB
+    //we can use a mask , where only those bits which needs to be flipped are set
+    //XOR property helps to further flip it
+    //mask is 1000 0001
+    uint8_t mask = 0x81;
+    *b  = *b ^ mask; 
+
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+// 2) Endianess (10 points)
+//    The following memory dump was taken while debugging an issue.
+//
+// Memory Dump:
+// Address:  Byte:
+// 0x1000    0xA0
+// 0x1001    0x0A
+// 0x1002    0xBA
+// 0x1003    0x48
+// 0x1004    0x2C
+// 0x1005    0xB7
+// 0x1006    0x3B
+// 0x1007    0x82
+// 0x1008    0x9C
+// 0x1009    0xE5
+// 0x100A    0x17
+// 0x100B    0x40
+// 0x100C    0xEF
+// 0x100D    0x47
+// 0x100E    0x0F
+// 0x100F    0x98
+// 0x1010    0x6F
+// 0x1011    0xD5
+// 0x1012    0x70
+// 0x1013    0x9E
+// 0x1014    0x94
+// 0x1015    0x99
+// 0x1016    0x4A
+// 0x1017    0xBA
+// 0x1018    0xCA
+// 0x1019    0xB2
+// 0x101A    0x32
+// 0x101B    0xE6
+// 0x101C    0x8E
+// 0x101D    0xB9
+// 0x101E    0xC5
+// 0x101F    0x2E
+// 0x1020    0xC3
+//
+// System is 32-bit, little-endian.
+// A variable called myPacket is of type packet_S (typedef below).
+// (Default compiler options; unpacked, naturally aligned.)
+// The address of myPacket is 0x1010.
+//
+typedef struct
+{
+    uint8_t count;
+    uint16_t data[2];
+    uint32_t timestamp;
+} packet_S;
+ 
+// a) What are the values of each member of myPacket?
+
+// b) If the system was big-endian, what would the values of each member of
+//    myPacket be?
+
+////////////////////////////////////////////////////////////////////////////////
+// 3) Memory allocation (10 points)
+//    The functions send_packet() and allocate_packet () are meant to:
+//    1. Allocate memory for a packet.
+//    2. Populate its contents
+//    3. Send it out to the intended recipient
+//    Let's assume that the contents of the packet are populated correctly
+//    and the packet is sent out to the intended recipient.
+//    Does the memory allocation look good? If not, please describe all issues.
+//    Also propose a better way to do this.
+// Answer: TODO
+void allocate_packet(packet_S *pkt)
+{
+    pkt = (packet_S *)malloc(sizeof(packet_S *));
+    // Initialize rest of the structure
+}
+
+void send_packet()
+{
+    packet_S *pkt = NULL;
+    allocate_packet(pkt);
+    // Send to recipient.
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// 4) Dictonary (30 points)
+//    Implement a dictionary that supports
+//    - addition of a new word and its meaning
+//    - deletion of a word
+//    - look up a word with a complete of partial input and return its meaning.
+//    Write a test stub to demonstrate all of the above functionality.
+//    Feel free to use STL or other library.
+
+#define MAX_STRING_SIZE 2048
+
+class Dictonary {
+public:
+  Dictonary();
+  virtual ~Dictonary();
+
+  bool addEntry(const char *newWord, const char *meaning);
+  bool deleteEntry(const char *word);
+  bool searchEntry(const char *newWord, char *meaning);
+
+  void dumpDict();
+
+private:
+};
+
+Dictonary::Dictonary() {
+
+}
+
+Dictonary::~Dictonary() {
+
+}
+
+bool Dictonary::addEntry(const char *newWord, const char *meaning) {
+  bool entryAdded = false;
+
+  return entryAdded;
+}
+
+bool Dictonary::deleteEntry(const char *word) {
+  bool entryDeleted = false;
+
+  return entryDeleted;
+}
+
+bool Dictonary::searchEntry(const char *newWord, char *meaning) {
+  bool entryFound = false;
+
+  return entryFound;
+}
+
+void Dictonary::dumpDict() {
+    
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// 5a) Circular buffer (14 points)
+//     Create a function to push a char into a FIFO. The FIFO should be implemented
+//     as a circular buffer of length 20. The FIFO will be used to cache the most
+//     recent data from a data stream, therefore, drop the oldest value if the
+//     buffer is full.
+ 
+#define BUFFER_SIZE 20
+char fifo_buffer[BUFFER_SIZE];
+static uint32_t buffer_level = 0;
+void buffer_push_ISR(char data)
+{
+    // Answer: TODO
+}
+ 
+////////////////////////////////////////////////////////////////////////////////
+// 5b) Print buffer (6 points)
+//     Create a function to print out and empty the data buffer.
+//     Data should be printed in order from oldest to newest, active elements only.
+ 
+void print_and_empty_buffer(void)
+{
+    // Answer: TODO
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+// 6) Unit Testing (10 points)
+//    Write a unit test for validate_pointer_and_data that exercises all code paths
+//    and branch conditions
+ 
+// @param dataPtr - int32_t pointer to data to be used
+//
+// @return TRUE if pointer is non-NULL, data value is positive, non-zero and not
+//         equal to the sentinel value 0x7FFFFFFF, FALSE otherwise
+//
+bool validate_pointer_and_data(int32_t* dataPtr)
+{
+    bool status = false;
+    if ((dataPtr != NULL) &&
+        (*dataPtr > 0)    &&
+        (*dataPtr != 0x7FFFFFFF))
+    {
+        status = true;
+    }
+    return status;
+}
+ 
+//
+// @return TRUE if all tests pass, FALSE otherwise
+//
+
+bool TEST_validate_pointer_and_data(void)
+{ 
+    //Answer: TODO
+    bool result = false;
+    return result;
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+// 7) Append Strings (15 points)
+//    Fix as many problems with this code as you can find.
+void *append_strings(void *str1, void *str2)
+{
+    char result_str;
+
+    if(str1 == NULL && str2 == NULL)
+        printk("ERROR: NULL pointers detected/n",__LINE__, __FUNCTION__);
+        return -1;
+
+    result_str = malloc(strlen(str1+str2));
+
+    strncpy(result_str, str1);
+    strncpy(result_str, str2);
+
+    return 0;
+}
+
+void test_append_strings()
+{
+    char my_string = "Test string";
+    char *result[];
+
+    printk("%s:%d Testing appending strings function/n",__LINE__, __FUNCTION__);
+
+    result = append_strings(my_string);
+
+    printk("Resulting string %s/n", result);
+
+}
+
+
+int main() {
+  //Bit Manipulation Input 1
+  uint8_t b=0xFF;
+  printf ("Problem 1: Original %x\n", b);
+  flip_hi_lo(&b);
+  printf ("Problem 1: Flipped %x\n", b);
+  
+   //Bit Manipulation Input 2
+  uint8_t c=0x7E;
+  printf ("Problem 1: Original %x\n", c);
+  flip_hi_lo(&c);
+  printf ("Problem 1: Flipped %x\n", c);
+
+  // 4) Dictonary 
+  Dictonary dict;
+
+  dict.addEntry("Tesla", "Prolific innovator");
+    dict.addEntry("Tesla", "Accelerates path to sustainable energy");
+    dict.addEntry("Pollute", "Act of contamination with harmful substances");
+
+    dict.deleteEntry("Pollution");
+
+    char meaning[MAX_STRING_SIZE];
+    dict.searchEntry("Tesla", meaning);
+    std::cout << "Problem 4: Tesla = " << meaning << std::endl;
+
+    dict.dumpDict();
+
+    // Add relevant tests for the dictonary
+
+    // 5) Circular buffer
+    char sample[BUFFER_SIZE]={'a','b','c','d','e','f',
+                              'z','x','e','g','h','j', 
+                              'q','w','e','r','t','y',
+                              '3','4'};
+  
+    for(int buf_idx = 0; buf_idx < BUFFER_SIZE; buf_idx++)
+    {
+        buffer_push_ISR(sample[buf_idx]);
+    }
+
+    for(int buf_idx = 13; buf_idx < 19; buf_idx++)
+    {
+        buffer_push_ISR(sample[buf_idx]);
+    }
+
+    print_and_empty_buffer();
+
+  // 6) Unit Testing
+    TEST_validate_pointer_and_data();
+
+    // 7) Append Strings
+    test_append_strings();
+
+  return 0;
+}
